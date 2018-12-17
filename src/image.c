@@ -342,7 +342,7 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 			temp_class = class_array[s];
 			class_array[s] = class_array[max];
 			class_array[max] = temp_class;
-			if(prob_array[s]>thresh)
+			if(prob_array[0]>thresh)
 			{
 			sprintf(buff, "%d %2.4f %2.4f %2.4f %2.4f %d %s %2.4f", i, dets[i].bbox.x, dets[i].bbox.y, dets[i].bbox.w, dets[i].bbox.h, class_array[s], names[class_array[s]], prob_array[s]);
 			fwrite(buff, sizeof(char), strlen(buff), fw);
