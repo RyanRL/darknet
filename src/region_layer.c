@@ -420,14 +420,14 @@ void get_region_detections(layer l, int w, int h, int netw, int neth, float thre
                     }
                 } else {
                     int j =  hierarchy_top_prediction(predictions + class_index, l.softmax_tree, tree_thresh, l.w*l.h);
-                    dets[index].prob[j] = (scale > thresh) ? scale : 0;
+                    dets[index].prob[j] = scale;
                 }
             } else {
                 if(dets[index].objectness){
                     for(j = 0; j < l.classes; ++j){
                         int class_index = entry_index(l, 0, n*l.w*l.h + i, l.coords + 1 + j);
                         float prob = scale*predictions[class_index];
-                        dets[index].prob[j] = (prob > thresh) ? prob : 0;
+                        dets[index].prob[j] = prob;
                     }
                 }
             }
