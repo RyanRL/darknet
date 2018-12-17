@@ -315,13 +315,13 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 
 		int class_array[classes];
 		double prob_array[classes];
-		char* names_array[classes];
+		//char* names_array[classes];
 		int temp;
 		for (temp = 0; temp < classes; temp++) 
         {
 			class_array[temp] = temp;
 			prob_array[temp] = dets[i].prob[temp];
-			strcpy(names[temp], names[temp]);
+		//	strcpy(names[temp], names[temp]);
 		}
 		char buff[1024];
 		int s, t;
@@ -342,9 +342,9 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 			temp_class = class_array[s];
 			class_array[s] = class_array[max];
 			class_array[max] = temp_class;
-			if(prob_array[s]>0.25)
+			if(prob_array[s]>thresh)
 			{
-			sprintf(buff, "%d %2.4f %2.4f %2.4f %2.4f %d %s %2.4f", i, dets[i].bbox.x, dets[i].bbox.y, dets[i].bbox.w, dets[i].bbox.h, class_array[s], names_array[class_array[s]], prob_array[s]);
+			sprintf(buff, "%d %2.4f %2.4f %2.4f %2.4f %d %s %2.4f", i, dets[i].bbox.x, dets[i].bbox.y, dets[i].bbox.w, dets[i].bbox.h, class_array[s], names[class_array[s]], prob_array[s]);
 			fwrite(buff, sizeof(char), strlen(buff), fw);
 			fwrite("\r\n", 1, 2, fw);
 			}
