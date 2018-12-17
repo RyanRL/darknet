@@ -591,6 +591,8 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         //resize_network(net, sized.w, sized.h);
         layer l = net->layers[net->n-1];
         
+        printf("%d %d %d.\n",net.h, net.w, net.c);
+        printf("%f.\n",net.outputs);
         printf("%d.\n",l.n);
         printf("%d.\n",net->n);
         float *X = sized.data;
