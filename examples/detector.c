@@ -593,7 +593,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         
         printf("%d %d %d.\n",net->h, net->w, net->c);
         printf("%f.\n",net->outputs);
-        printf("%d.\n",l->n);
+        printf("%d.\n",l.n);
         printf("%d.\n",net->n);
         float *X = sized.data;
         time=what_time_is_it_now();
