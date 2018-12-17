@@ -315,7 +315,7 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 
 		int class_array[classes];
 		double prob_array[classes];
-		char* names_array[];
+		char* names_array[classes];
 		int temp;
 		for (temp = 0; temp < classes; temp++) 
         {
