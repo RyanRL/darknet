@@ -591,17 +591,17 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         //resize_network(net, sized.w, sized.h);
         layer l = net->layers[net->n-1];
         
+        float *X = sized.data;
+        time=what_time_is_it_now();
+        network_predict(net, X);
         printf("%d %d %d.\n",net->h, net->w, net->c);
         printf("%f.\n",net->outputs);
         printf("%d.\n",l.n);
         printf("%d.\n",net->n);
-        float *X = sized.data;
-        time=what_time_is_it_now();
-        network_predict(net, X);
         printf("%s: Predicted in %f seconds.\n", input, what_time_is_it_now()-time);
         int nboxes = 0;
         detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
-        //printf("%d\n", nboxes);
+        printf("%d\n", nboxes);
         //if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
         draw_detections(im, dets, nboxes, thresh, names, alphabet, l.classes);
