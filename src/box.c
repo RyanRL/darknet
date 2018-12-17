@@ -75,16 +75,16 @@ void do_nms_sort(detection *dets, int total, int classes, float thresh)
             dets[i].sort_class = k;
         }
         qsort(dets, total, sizeof(detection), nms_comparator);
-        for(i = 0; i < total; ++i){
-            if(dets[i].prob[k] == 0) continue;
-            box a = dets[i].bbox;
-            for(j = i+1; j < total; ++j){
-                box b = dets[j].bbox;
-                if (box_iou(a, b) > thresh){
-                    dets[j].prob[k] = 0;
-                }
-            }
-        }
+        //for(i = 0; i < total; ++i){
+        //    if(dets[i].prob[k] == 0) continue;
+        //    box a = dets[i].bbox;
+        //    for(j = i+1; j < total; ++j){
+        //        box b = dets[j].bbox;
+        //        if (box_iou(a, b) > thresh){
+        //            dets[j].prob[k] = 0;
+        //        }
+        //    }
+        // }
     }
 }
 
