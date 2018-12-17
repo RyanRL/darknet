@@ -249,7 +249,7 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 	char box_h[]="Box h value";
 	char class_number[]="Class ID";
 	char class_name[]="Class Name";
-	char class_prob[]="Class Probability"
+	char class_prob[]="Class Probability";
 	FILE* fw = fopen(labelpath, "wb");
 	sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
 	fwrite(buff_temp, sizeof(char), strlen(buff), fw);
