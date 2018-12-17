@@ -241,7 +241,19 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
 	int i, j;
 	int K = 5;
 	char labelpath[] = "information.txt";
+	char buff_temp[1024];
+	char box_id[]="Box ID";
+	char box_x[]="Box x value";
+	char box_y[]="Box y value";
+	char box_w[]="Box w value";
+	char box_h[]="Box h value";
+	char class_number[]="Class ID";
+	char class_name[]="Class Name";
+	char class_prob[]="Class Probability"
 	FILE* fw = fopen(labelpath, "wb");
+	sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
+	fwrite(buff_temp, sizeof(char), strlen(buff), fw);
+	fwrite("\r\n", 1, 2, fw);
 	for (i = 0; i < num; ++i) 
     {
 		char labelstr[4096] = { 0 };
