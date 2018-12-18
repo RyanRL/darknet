@@ -293,7 +293,7 @@ void test_yolo(char *cfgfile, char *weightfile, char *filename, float thresh)
         int nboxes = 0;
         detection *dets = get_network_boxes(net, 1, 1, thresh, 0, 0, 0, &nboxes);
         if (nms) do_nms_sort(dets, l.side*l.side*l.n, l.classes, nms);
-        char labelpath[]="/home/liu.6732/yolo.txt"
+        char labelpath[]="/home/liu.6732/yolo.txt";
         draw_detections(0, im, dets, labelpath, l.side*l.side*l.n, thresh, voc_names, alphabet, 20);
         save_image(im, "predictions");
         show_image(im, "predictions", 0);
