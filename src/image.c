@@ -250,7 +250,7 @@ void draw_detections(int frame_num, image im, detection *dets, char labelpath[],
 	//char class_number[]="Class_ID";
 	//char class_name[]="Class_Name";
 	//char class_prob[]="Class_Probability";
-	FILE* fw = fopen(labelpath, "a");
+	FILE* fw = fopen(labelpath, "ar");
 	//sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
 	//fwrite(buff_temp, sizeof(char), strlen(buff_temp), fw);
 	//fwrite("\r\n", 1, 2, fw);
