@@ -631,7 +631,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
         else{
 	    char image_name[1024];
 	    char path_name[]="/home/liu.6732/SAVE_IMAGE_LABEL/";
-	    sprintf(image_name, "%s%d", path_name, line_num)
+	    sprintf(image_name, "%s%d", path_name, line_num);
             save_image(im, image_name);
 #ifdef OPENCV
             make_window("predictions", 512, 512, 0);
