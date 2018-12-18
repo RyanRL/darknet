@@ -575,7 +575,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     char class_number[]="Class_ID";
     char class_name[]="Class_Name";
     char class_prob[]="Class_Probability";
-    FILE* fpWRITE = fopen(labelpath, "ar");
+    FILE* fpWRITE = fopen(labelpath, "a+");
     sprintf(buff_temp, "%s %s %s %s %s %s %s %s %s", video_frame, box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
     fwrite(buff_temp, sizeof(char), strlen(buff_temp), fpWRITE); 
     fwrite("\r\n", 1, 2, fpWRITE);
