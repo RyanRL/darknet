@@ -236,7 +236,7 @@ image **load_alphabet()
     return alphabets;
 }
 
-void draw_detections(image im, detection *dets, char *labelpath, int num, float thresh, char **names, image **alphabet, int classes)
+void draw_detections(int frame_num, image im, detection *dets, char *labelpath, int num, float thresh, char **names, image **alphabet, int classes)
 {
 	int i, j;
 	int K = 5;
@@ -255,11 +255,11 @@ void draw_detections(image im, detection *dets, char *labelpath, int num, float 
 	//fwrite(buff_temp, sizeof(char), strlen(buff_temp), fw);
 	//fwrite("\r\n", 1, 2, fw);
 	for (i = 0; i < num; ++i) 
-    {
+       {
 		char labelstr[4096] = { 0 };
 		int class = -1;
 		for (j = 0; j < classes; ++j) 
-        {
+               {
 			if (dets[i].prob[j] > thresh) {
 				if (class < 0) {
 					strcat(labelstr, names[j]);
@@ -269,7 +269,7 @@ void draw_detections(image im, detection *dets, char *labelpath, int num, float 
 					strcat(labelstr, ", ");
 					strcat(labelstr, names[j]);
 				}
-				printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
+				// printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
 			}
 		}
 
@@ -356,7 +356,7 @@ void draw_detections(image im, detection *dets, char *labelpath, int num, float 
 			class_array[max] = temp_class;
 			if(prob_array[s]>thresh)
 			{
-			sprintf(buff, "%d %2.4f %2.4f %2.4f %2.4f %d %s %2.4f", i, dets[i].bbox.x, dets[i].bbox.y, dets[i].bbox.w, dets[i].bbox.h, class_array[s], names[class_array[s]], prob_array[s]);
+			sprintf(buff, "%d %d %2.4f %2.4f %2.4f %2.4f %d %s %2.4f", frame_num, i, dets[i].bbox.x, dets[i].bbox.y, dets[i].bbox.w, dets[i].bbox.h, class_array[s], names[class_array[s]], prob_array[s]);
 			fwrite(buff, sizeof(char), strlen(buff), fw);
 			fwrite("\r\n", 1, 2, fw);
 			}
