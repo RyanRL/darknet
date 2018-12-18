@@ -564,7 +564,22 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     list *options = read_data_cfg(datacfg);
     char *name_list = option_find_str(options, "names", "data/names.list");
     char **names = get_labels(name_list);
-    File *fpREAD=fopen(txtfilename, "r");
+    char labelpath[] = "/home/liu.6732/information.txt";
+    char buff_temp[1024];
+    char box_id[]="Box_ID";
+	char box_x[]="Box_x_value";
+	char box_y[]="Box_y_value";
+	char box_w[]="Box_w_value";
+	char box_h[]="Box_h_value";
+	char class_number[]="Class_ID";
+	char class_name[]="Class_Name";
+	char class_prob[]="Class_Probability";
+    FILE* fpWRITE = fopen(labelpath, "a+");
+	sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
+	fwrite(buff_temp, sizeof(char), strlen(buff_temp), fpWRITE);
+	fwrite("\r\n", 1, 2, fpWRITE);
+    int line_num=0;
+    FILE* fpREAD=fopen(txtfilename, "r");
     char *filename;
     image **alphabet = load_alphabet();
     network *net = load_network(cfgfile, weightfile, 0);
@@ -575,6 +590,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     char *input = buff;
     float nms=.45;
     while(!feof(fpREAD)){
+        line_num=line_num+1;
         fscanf(fpREAD,"%s",filename);
         if(filename){
             strncpy(input, filename, 256);
@@ -596,14 +612,14 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
         float *X = sized.data;
         time=what_time_is_it_now();
         network_predict(net, X);
-        printf("%d %d %d.\n",net->h, net->w, net->c);
-        printf("%f.\n",net->outputs);
-        printf("%d.\n",l.n);
-        printf("%d.\n",net->n);
+        //printf("%d %d %d.\n",net->h, net->w, net->c);
+        //printf("%f.\n",net->outputs);
+        //printf("%d.\n",l.n);
+        //printf("%d.\n",net->n);
         printf("%s: Predicted in %f seconds.\n", input, what_time_is_it_now()-time);
         int nboxes = 0;
         detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
-        printf("%d\n", nboxes);
+        //printf("%d\n", nboxes);
         //if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
         draw_detections(im, dets, nboxes, thresh, names, alphabet, l.classes);
@@ -624,6 +640,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
         if (filename) break;
     }
     fclose(fpREAD);
+    fclose(fpWRITE);
 }
 
 /*
