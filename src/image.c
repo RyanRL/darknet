@@ -236,7 +236,7 @@ image **load_alphabet()
     return alphabets;
 }
 
-void draw_detections(int frame_num, image im, detection *dets, char *labelpath, int num, float thresh, char **names, image **alphabet, int classes)
+void draw_detections(int frame_num, image im, detection *dets, char labelpath[], int num, float thresh, char **names, image **alphabet, int classes)
 {
 	int i, j;
 	int K = 5;
@@ -250,7 +250,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 	//char class_number[]="Class_ID";
 	//char class_name[]="Class_Name";
 	//char class_prob[]="Class_Probability";
-	FILE* fw = fopen(labelpath, "a+");
+	FILE* fw = fopen(labelpath, "a");
 	//sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
 	//fwrite(buff_temp, sizeof(char), strlen(buff_temp), fw);
 	//fwrite("\r\n", 1, 2, fw);
@@ -335,7 +335,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 			prob_array[temp] = dets[i].prob[temp];
 		//	strcpy(names[temp], names[temp]);
 		}
-		char buff[1024];
+		char buff[2048];
 		int s, t;
 		int max, temp_class;
 		double temp_prob;
