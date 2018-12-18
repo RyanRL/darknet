@@ -579,6 +579,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     sprintf(buff_temp, "%s %s %s %s %s %s %s %s %s", video_frame, box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
     fwrite(buff_temp, sizeof(char), strlen(buff_temp), fpWRITE); 
     fwrite("\r\n", 1, 2, fpWRITE);
+    fclose(fpWRITE);
     int line_num=0;
     FILE* fpREAD=fopen(txtfilename, "r");
     image **alphabet = load_alphabet();
@@ -644,7 +645,6 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
         //if (filename) break;
     }
     fclose(fpREAD);
-    fclose(fpWRITE);
 }
 
 /*
