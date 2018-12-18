@@ -250,13 +250,13 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 	//char class_number[]="Class_ID";
 	//char class_name[]="Class_Name";
 	//char class_prob[]="Class_Probability";
-	FILE* fw = fopen(labelpath, "wb");
+	FILE* fw = fopen(labelpath, "a+");
 	//sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
 	//fwrite(buff_temp, sizeof(char), strlen(buff_temp), fw);
 	//fwrite("\r\n", 1, 2, fw);
 	for (i = 0; i < num; ++i) 
         {
-		char labelstr[4096] = { 0 };
+		char labelstr[4096];
 		int class = -1;
 		for (j = 0; j < classes; ++j) 
                {
@@ -326,7 +326,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 		}
 
 		int class_array[classes];
-		double prob_array[classes];
+		float prob_array[classes];
 		//char* names_array[classes];
 		int temp;
 		for (temp = 0; temp < classes; temp++) 
@@ -338,7 +338,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 		char buff[2048];
 		int s, t;
 		int max, temp_class;
-		double temp_prob;
+		float temp_prob;
 		for (s = 0; s < K; s++) 
                 {
 			max = s;
@@ -364,6 +364,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 	}
 	fclose(fw);
 }
+
 void transpose_image(image im)
 {
     assert(im.w == im.h);
