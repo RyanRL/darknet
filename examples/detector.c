@@ -582,7 +582,6 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     printf("%s", txtfilename);
     int line_num=0;
     FILE* fpREAD=fopen(txtfilename, "r");
-    char *filename;
     image **alphabet = load_alphabet();
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
@@ -593,6 +592,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     float nms=.45;
     while(!feof(fpREAD)){
         line_num=line_num+1;
+	char filename[256];
         fscanf(fpREAD,"%s",filename);
         if(filename){
             strncpy(input, filename, 256);
