@@ -240,20 +240,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 {
 	int i, j;
 	int K = 5;
-	//char labelpath[] = "information.txt";
-	//char buff_temp[1024];
-	//char box_id[]="Box_ID";
-	//char box_x[]="Box_x_value";
-	//char box_y[]="Box_y_value";
-	//char box_w[]="Box_w_value";
-	//char box_h[]="Box_h_value";
-	//char class_number[]="Class_ID";
-	//char class_name[]="Class_Name";
-	//char class_prob[]="Class_Probability";
 	FILE* fw = fopen(labelpath, "a+");
-	//sprintf(buff_temp, "%s %s %s %s %s %s %s %s", box_id, box_x, box_y, box_w, box_h, class_number, class_name, class_prob);
-	//fwrite(buff_temp, sizeof(char), strlen(buff_temp), fw);
-	//fwrite("\r\n", 1, 2, fw);
 	for (i = 0; i < num; ++i) 
         {
 		char labelstr[4096];
@@ -324,7 +311,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 				free_image(tmask);
 			}
 		}
-
+                /*
 		int class_array[classes];
 		float prob_array[classes];
 		//char* names_array[classes];
@@ -361,6 +348,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 			fwrite("\r\n", 1, 2, fw);
 			}
 		}
+		*/
 	}
 	fclose(fw);
 }
