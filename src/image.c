@@ -256,7 +256,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 					strcat(labelstr, ", ");
 					strcat(labelstr, names[j]);
 				}
-				printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
+				// printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
 			}
 		}
 
@@ -311,7 +311,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 				free_image(tmask);
 			}
 		}
-                /*
+                
 		int class_array[classes];
 		float prob_array[classes];
 		//char* names_array[classes];
@@ -348,7 +348,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 			fwrite("\r\n", 1, 2, fw);
 			}
 		}
-		*/
+		
 	}
 	fclose(fw);
 }
