@@ -590,19 +590,23 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     char buff[256];
     char *input = buff;
     float nms=.45;
-    while(!feof(fpREAD)){
+    while(1){
         line_num=line_num+1;
 	char filename[256];
         fscanf(fpREAD,"%s",filename);
-        if(filename){
-            strncpy(input, filename, 256);
-        } else {
-            printf("Enter Image Path: ");
-            fflush(stdout);
-            input = fgets(input, 256, stdin);
-            if(!input) return;
-            strtok(input, "\n");
-        }
+	if(feof(fpREAD)){
+	    break;
+	}
+	strncpy(input, filename, 256);
+        //if(filename){
+        //    strncpy(input, filename, 256);
+        //} else {
+        //    printf("Enter Image Path: ");
+        //    fflush(stdout);
+        //    input = fgets(input, 256, stdin);
+        //    if(!input) return;
+        //    strtok(input, "\n");
+        //}
         image im = load_image_color(input,0,0);
         image sized = letterbox_image(im, net->w, net->h);
         //image sized = resize_image(im, net->w, net->h);
