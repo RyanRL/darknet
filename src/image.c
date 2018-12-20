@@ -243,7 +243,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 	FILE* fw = fopen(labelpath, "a+");
 	for (i = 0; i < num; ++i) 
         {
-		char labelstr[4096];
+		char labelstr[]="0";
 		int class = -1;
 		for (j = 0; j < classes; ++j) 
                {
@@ -256,7 +256,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 					strcat(labelstr, ", ");
 					strcat(labelstr, names[j]);
 				}
-				// printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
+				printf("%s: %.0f%%\n", names[j], dets[i].prob[j] * 100);
 			}
 		}
 
