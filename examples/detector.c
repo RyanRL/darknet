@@ -582,15 +582,15 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *txtfile
     fclose(fpWRITE);
     int line_num=0;
     FILE* fpREAD=fopen(txtfilename, "r");
-    image **alphabet = load_alphabet();
-    network *net = load_network(cfgfile, weightfile, 0);
-    set_batch_network(net, 1);
     srand(2222222);
     double time;
     char buff[256];
     char *input = buff;
     float nms=.45;
     while(1){
+	image **alphabet = load_alphabet();
+	network *net = load_network(cfgfile, weightfile, 0);
+        set_batch_network(net, 1);    
         line_num=line_num+1;
 	char filename[256];
         fscanf(fpREAD,"%s",filename);
