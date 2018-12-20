@@ -243,7 +243,7 @@ void draw_detections(int frame_num, image im, detection *dets, char *labelpath, 
 	FILE* fw = fopen(labelpath, "a+");
 	for (i = 0; i < num; ++i) 
         {
-		char labelstr[]="0";
+		char labelstr[]="";
 		int class = -1;
 		for (j = 0; j < classes; ++j) 
                {
